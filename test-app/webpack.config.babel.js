@@ -9,6 +9,13 @@ const extractText = require('@webpack-blocks/extract-text2')
 const typescript = require('@webpack-blocks/typescript')
 const plugins = require('./webpack.plugins')
 
+process.on('uncaughtException', (error) => {
+  console.error('>>')
+  console.error(error.message)
+  console.error(error.stack)
+  process.exit(1)
+})
+
 module.exports = createConfig([
   setOutput('./build/bundle.js'),
   babel(),
@@ -32,7 +39,7 @@ module.exports = createConfig([
     })
   ]),
   env('production', [
-    entryPoint('./src/index.js'),
+    entryPoint('./src/inex.js'),
     extractText(),
     addPlugins(plugins.productionPlugins)
   ])
